@@ -14,3 +14,4 @@ t/lib/Test/CDBI/Variant.pm
 t/db/pristene.db
 t/albumattr.t
 t/boolean.t
+t/perl-critic.t
