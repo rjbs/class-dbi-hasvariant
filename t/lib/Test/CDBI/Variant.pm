@@ -1,16 +1,35 @@
 
 package Test::CDBI::Variant;
 use base qw(Class::DBI);
-__PACKAGE__->connection("dbi:SQLite:dbname=t/db/variants.db");
+__PACKAGE__->connection("dbi:SQLite:dbname=t/variants.db");
 
 __PACKAGE__->add_relationship_type(
 	has_variant => 'Class::DBI::Relationship::HasVariant'
 );
 
-use File::Copy qw(copy);
-sub get_pristene_db {
-	copy("./t/db/pristene.db", "./t/db/variants.db")
-		or die "couldn't copy pristene db file: $!";
+sub get_pristene_db  {
+  unlink 't/variants.db';
+  my $SQL = <<'SQL';
+  CREATE TABLE albumattributes
+  (albumattrid INTEGER, attribute, attr_value);
+
+  INSERT INTO albumattributes VALUES (1, 'size', 16);
+
+  INSERT INTO albumattributes VALUES (2, 'area', 16);
+
+  INSERT INTO albumattributes VALUES (3, 'start_end', '1,100');
+
+  CREATE TABLE booleans (bid INTEGER, boolean);
+
+  INSERT INTO booleans VALUES (1, 0);
+
+  INSERT INTO booleans VALUES (2, 1);
+
+  INSERT INTO booleans VALUES (3, NULL);
+SQL
+
+  my $dbh = DBI->connect('dbi:SQLite:dbname=t/variants.db');
+  $dbh->do($_) for split /\n\n/, $SQL;
 }
        
 package Boolean::Stored;
@@ -85,6 +104,5 @@ __PACKAGE__->mk_accessors(qw(value));
 package Music::Album::StartEnd;
 use base qw(Class::Accessor);
 __PACKAGE__->mk_accessors(qw(start end));
-
 
 1;

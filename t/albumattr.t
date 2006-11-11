@@ -3,20 +3,22 @@ use Test::More;
 use strict;
 use warnings;
 
+use lib 't/lib';
+
 BEGIN {
 	eval 'use DBD::SQLite 1.0 ()';
 	plan skip_all => "DBD::SQLite required to run this test" if $@;
 
 	plan tests => 18;
 
-	use lib 't/lib';
 	use_ok("Test::CDBI::Variant");
 }
 
 Test::CDBI::Variant::get_pristene_db;
 
 {
-	my $attr = Music::Album::Attribute->retrieve(1);
+	my $attr = Music::Album::Attribute->retrieve('1');
+
 	cmp_ok($attr, 'eq', '1', "correct stringification");
 	cmp_ok($attr->attribute, 'eq','size', "proper attribute");
 	isa_ok($attr->attr_value, 'Music::Album::Edge');

@@ -11,13 +11,13 @@ Class::DBI::Relationship::HasVariant - columns with varying types
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
  $Id: HasVariant.pm,v 1.3 2004/10/12 16:53:07 rjbs Exp $
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.020';
 
 =head1 SYNOPSIS
 
@@ -103,8 +103,10 @@ sub remap_arguments {
 
 sub triggers {
 	my $self = shift;
-	$self->class->_require_class($self->foreign_class)
+  
+	$self->class->_require_class($self->foreign_class) ## no critic Private
 		if $self->foreign_class;
+
 	my $column = $self->accessor;
 	return (
 		select              => $self->_inflator,

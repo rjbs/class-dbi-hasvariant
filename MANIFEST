@@ -1,17 +1,15 @@
 Changes
 MANIFEST
-META.yml # Will be created by "make dist"
 Makefile.PL
 README
 
-HasVariant.pm
+lib/Class/DBI/Relationship/HasVariant.pm
 
 t/00_load.t
 t/pod-coverage.t
 t/pod.t
 
 t/lib/Test/CDBI/Variant.pm
-t/db/pristene.db
 t/albumattr.t
 t/boolean.t
 t/perl-critic.t

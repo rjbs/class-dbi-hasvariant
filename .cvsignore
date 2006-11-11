@@ -1,9 +1,0 @@
-blib*
-Makefile
-Makefile.old
-pm_to_blib*
-*.tar.gz
-.lwpcookies
-.releaserc
-Class-DBI-Relationship-HasVariant-*
-cover_db
