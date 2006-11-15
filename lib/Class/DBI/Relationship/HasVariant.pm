@@ -13,7 +13,7 @@ Class::DBI::Relationship::HasVariant - columns with varying types
 
 version 0.02
 
- $Id: HasVariant.pm,v 1.3 2004/10/12 16:53:07 rjbs Exp $
+ $Id$
 
 =cut
 
